@@ -22,7 +22,7 @@
     
    // _secondTextField.text = _strdata;
     
-    self.title = @"Second View";
+    self.title = @"Second View ";
 }
 
 - (IBAction)PreviousButtClicked:(id)sender
