@@ -21,7 +21,7 @@
     secondview = [[SecondViewController alloc] init];
     secondview.delegate=self;
     
-     self.title = @"First View";
+     self.title = @"First View Controller";
 }
 
 - (IBAction)NextButtClicked:(id)sender
