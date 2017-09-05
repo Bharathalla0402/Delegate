@@ -8,9 +8,12 @@
 
 #import "ViewController.h"
 #import "SecondViewController.h"
+#import "ApiRequest.h"
 
-@interface ViewController ()
-
+@interface ViewController ()<ApirequestDelegate>
+{
+    ApiRequest *request;
+}
 @end
 
 @implementation ViewController
@@ -21,14 +24,48 @@
     secondview = [[SecondViewController alloc] init];
     secondview.delegate=self;
     
+    request = [[ApiRequest alloc]init];
+    request.delegate=self;
+    
      self.title = @"First View";
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(notificationHappened:)
+                                                 name:@"myname"
+                                               object:nil];
+    
+    
+    // Post Method Calling
+   // NSString *post = [NSString stringWithFormat:@"module=%@&user_id=%@",@"",@""];
+   // NSString *strurl=[NSString stringWithFormat:@"%@",@""];
+   // [request sendRequest:post withUrl:strurl];
+    
+    
+    //Get Method Calling
+   // NSString *strurl=[NSString stringWithFormat:@"%@",@""];
+  // [request sendRequest2:nil withUrl:strurl];
+    
+}
+
+//-(void)viewWillAppear:(BOOL)animated
+//{
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(notificationHappened:)
+//                                                 name:@"myname"
+//                                               object:nil];
+//}
+
+- (void)notificationHappened:(NSNotification *)notification
+{
+    NSDictionary *dict=notification.userInfo;
+    _firstTextField.text=[NSString stringWithFormat:@"%@ %@",[dict valueForKey:@"first"],[dict valueForKey:@"Second"]];
 }
 
 - (IBAction)NextButtClicked:(id)sender
 {
     SecondViewController *secondVC=[self.storyboard instantiateViewControllerWithIdentifier:@"SecondViewController"];
     secondVC.strdata=_firstTextField.text;
-    secondVC.delegate=self;
+   // secondVC.delegate=self;
     [self.navigationController pushViewController:secondVC animated:YES];
 }
 

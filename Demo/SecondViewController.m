@@ -29,7 +29,13 @@
 {
     [self.view endEditing:YES];
     [self.navigationController popViewControllerAnimated:YES];
-    [_delegate responsewithToken:_strdata :_secondTextField.text];
+   // [_delegate responsewithToken:_strdata :_secondTextField.text];
+    
+    NSDictionary *date=[[NSDictionary alloc] initWithObjectsAndKeys:_strdata,@"first",_secondTextField.text,@"Second", nil];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"myname"
+                                                        object:self
+                                                    userInfo:date];
 }
 
 - (void)didReceiveMemoryWarning {
